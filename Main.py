@@ -2,38 +2,59 @@ while True:
     user_action = input('Type add,show, edit, complete or exit: ')
     user_action = user_action.strip()
     
-    match user_action:
-        case 'add':
-            todo = input('Enter a Todo: ') + '\n'
+    if 'add' in user_action:
+        todo = user_action[4:]
             
-            file = open('todos.txt', 'r')
-            todos = file.readlines()
-            file.close()
-            
-            todos.append(todo)
-            
-            file = open('todos.txt', 'w')
-            file.writelines(todos)
-            file.close()
-        case 'show':
-                file = open('todos.txt', 'r')
+        with open('todos.txt', 'r') as file:
                 todos = file.readlines()
-                file.close()
-                for index, items in  enumerate(todos):
-                    row = f'{index + 1}-{items}'
-                    print(row)
-        case 'edit':
-            number = int(input('Number of the Todo item to Edit: ')) 
-            number = number - 1 
-            new_todo = input('Enter a new Todo: ')
-            todos[number] = new_todo
-        case 'complete':
-            number = int(input('Enter the Number of the Completed item to remove: '))
-            todos.pop(number - 1)
-        case 'exit':
-            break
-        case _ :
-            print('Wrong Input Recieved')
+                
+        todos.append(todo)
+            
+        with open('todos.txt', 'w') as file:
+                file.writelines(todos)
+            
+    elif 'show' in user_action:
+        with open('todos.txt', 'r') as file:
+                todos = file.readlines()
+                
+        for index, items in  enumerate(todos):
+                items = items.strip('\n')
+                row = f'{index + 1}-{items}'
+                print(row)
+                
+    elif 'edit' in user_action:
+        number = int(user_action[5:])
+        number = number - 1 
+            
+        with open('todos.txt', 'r') as file:
+            todos = file.readlines()
+            
+        new_todo = input('Enter a new Todo: ')
+        todos[number] = new_todo +'\n'
+            
+        with open('todos.txt', 'w') as file:
+                file.writelines(todos)
+            
+    elif 'complete' in user_action:
+            
+        number = int(user_action[9:])
+            
+        with open('todos.txt', 'r') as file:
+            todos = file.readlines()
+        index = number - 1
+        removed_todo = todos[index].strip('\n')
+        todos.pop(index)
+    
+        with open('todos.txt', 'w') as file:
+            file.writelines(todos)
+                
+            message = f'Todo {removed_todo} was completed and removed from the list.'
+            print(message)
+            
+    elif 'exit'in user_action:
+        break
+    else:
+        print('Wrong Input Recieved')
     
     
 print('Finished')

@@ -1,6 +1,6 @@
 hello
-next
+welcome
 python
-hello2
-playtime
-get
+pycharm
+show
+melon
