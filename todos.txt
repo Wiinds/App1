@@ -1,6 +1,5 @@
-hello
-welcome
+warm welcome
 python
 pycharm
-show
-melon
+slow
+money
