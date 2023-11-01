@@ -1,5 +1,6 @@
-warm welcome
 python
 pycharm
-slow
-money
+slow and steady
+futures
+swing
+intra
